@@ -8,11 +8,12 @@ jobs:
   job2:
     runs-on: windows-latest
     needs: job1
-    if: ${{ false }}
+    if: ${{ true }}
     steps:
       - run: echo two
   job3:
     runs-on: ubuntu-latest
+    if: ${{ ! failure() }}
     needs: job2
     steps:
       - run: echo three
