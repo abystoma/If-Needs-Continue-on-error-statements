@@ -1,0 +1,14 @@
+name: Conditional workflow
+on: push
+jobs:
+  job1:
+      runs-on: ubuntu-latest
+      steps:
+          - id: step1
+            run: echo "test=foo" >> $GITHUB_OUTPUT
+          - name: step 2
+            if: contains(steps.step1.outputs.test, 'foo')
+            run: echo 'foo bar is executed'
+          - name: step 3
+            if: contains(steps.step1.outputs.test, 'hello')
+            run: echo 'hello world is executed'
