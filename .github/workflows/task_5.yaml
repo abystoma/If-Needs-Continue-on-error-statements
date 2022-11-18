@@ -5,6 +5,8 @@ env:
 jobs:
   weekly:
     runs-on: ubuntu-latest
+    outputs:
+      output_1: ${{ steps.step1.outputs.weekly_wage }} 
     env:
       hours: 40
     steps:
@@ -12,6 +14,8 @@ jobs:
         run: echo "weekly_wage=$((${{ env.hourly_wage }} * ${{ env.hours }}))" >> $GITHUB_OUTPUT
   overtime:
     runs-on: ubuntu-latest
+    outputs:
+      output_2: ${{ steps.step1.outputs.overtime_wage }} 
     env:
       overtime: 15
     steps:
@@ -22,4 +26,4 @@ jobs:
     needs: [weekly, overtime]
     steps:
       - name: total
-        run: echo $((${{needs.weekly.outputs.weekly_wage}} + ${{needs.overtime.outputs.overtime_wage}}))
+        run: echo $((${{needs.weekly.outputs.output_1}} + ${{needs.overtime.outputs.output_2}}))
