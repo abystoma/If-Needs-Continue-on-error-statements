@@ -2,3 +2,4 @@
 .github/workflows/def.yaml
 .github/workflows/parallel.yaml
 .github/workflows/task_1.yaml
+.github/workflows/task_2.yaml
