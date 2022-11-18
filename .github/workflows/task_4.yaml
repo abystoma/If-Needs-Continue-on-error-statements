@@ -1,4 +1,4 @@
-name: Task3
+name: Sequential
 on:
   push:
 jobs:
@@ -19,5 +19,10 @@ jobs:
     runs-on: ubuntu-latest
     needs: [job2, job3]
     steps:
-      - run: echo 4
-
+      - run: echo four
+  job5:
+    runs-on: ubuntu-latest
+    if: ${{ always() }}
+    needs: job1
+    steps:
+      - run: echo five
